@@ -1,8 +1,8 @@
-name:basic workflow manual run
+name:basic workflow manual run first
 
 
 on:
-   workflow_dispatch:
+  workflow_dispatch:
    
    
    
