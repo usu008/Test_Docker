@@ -17,4 +17,4 @@ COPY . .
 # Specify the command to run when the container starts
 #CMD ["stream", "your_script.py"]
 
-CMD streamlit run .\new_dashboard.py
+CMD ["streamlit run","new_dashboard.py"]
