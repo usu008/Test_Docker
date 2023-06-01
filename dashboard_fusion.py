@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 #@st.cache  # This decorator improves app performance by caching the DataFrame
 
-#df = pd.read_excel('C:/Users/Mohamed.Yousuf/Downloads/seeded security role-RPT_userwith-role.xlsx')
+#df = pd.read_excel('seeded security role-RPT_userwith-role.xlsx')
 import streamlit as st
 
 # Page selection
@@ -19,7 +19,7 @@ if page == "PROD":
 
 elif page == "Dev26":
     st.header("Dev26")
-    df = pd.read_excel('C:/Users/Mohamed.Yousuf/Downloads/seeded security role-RPT_userwith-role.xlsx')
+    df = pd.read_excel('seeded security role-RPT_userwith-role.xlsx')
     #df = load_data()
     selected_role = st.selectbox('Select a role', df['ROLE_NAME'].unique())
     filtered_df = df[df['ROLE_NAME'] == selected_role]
