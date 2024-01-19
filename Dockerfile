@@ -1,3 +1,8 @@
+# Use the appropriate Windows base image
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+# Your Windows-specific commands here
+
 # Use a base image with the desired Python version
 FROM python:3.9
 
