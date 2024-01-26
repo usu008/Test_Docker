@@ -1,22 +1,26 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-windowsservercore
+# Use the official Windows Server Core image as a base image
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-# Set the working directory in the container
+# Create a directory to work in
 WORKDIR /app
 
-# Copy the current directory contents into the container
-COPY . /app
+# Copy your application code into the container
+COPY . .
 
-# Install any needed packages specified in requirements.txt with extra index
-RUN powershell -Command $ErrorActionPreference = 'Stop'; \
-    $ProgressPreference = 'SilentlyContinue'; \
-    pip install --no-cache-dir -r requirements.txt --extra-index-url=https://pypi.org/simple/
+# Install Python (if not already installed)
+RUN powershell -Command Add-WindowsFeature Web-Server
 
-# Make port 8501 available to the world outside this container
-EXPOSE 8501
+# Install Python
+RUN Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.8.12/python-3.8.12.exe -OutFile python-3.8.12.exe
+RUN Start-Process -Wait -FilePath .\python-3.8.12.exe -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=1"
+RUN Remove-Item -Force python-3.8.12.exe
 
-# Define environment variable
-ENV NAME StreamlitApp
+# Set environment variables
+ENV PATH="C:\Python38;${PATH}"
+ENV PYTHONPATH="C:\Python38\Lib"
 
-# Run ROLE_ADD.py when the container launches
-CMD ["python", "ROLE_ADD.py"]
+
+
+
+# Command to run the application
+CMD ["streamlit", "run", "your_streamlit_app.py"]
