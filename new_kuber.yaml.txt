@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rolebot_app
+spec:
+  selector:
+    matchLabels:
+      app: rolebot_app
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: rolebot_app
+    spec:
+      containers:
+      - name: rolebot_app
+        image: eu-frankfurt-1.ocir.io/dpwglobalpass/role_bot:latest
+        ports:
+        - containerPort: 80
